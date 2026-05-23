@@ -1,0 +1,44 @@
+//require("dotenv").config({path:'./.env'});
+
+import express from "express";
+import dotenv from "dotenv";
+import connectDB from "./db/index.js";
+
+dotenv.config({
+  path: "./.env",
+});
+
+const app = express();
+const port = process.env.PORT || 5000;
+
+connectDB()
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
+  })
+  .catch((error) => {
+    console.log("Error starting server:", error);
+  });
+
+/*  this code is for connecting to MongoDB and starting the Express server. It uses Mongoose to connect to the MongoDB database specified by the MONGODB_URI environment variable and the DB_NAME constant. If the connection is successful, it starts the Express server on the port specified by the PORT environment variable. If there is an error during the connection, it logs the error to the console.
+import express from "express";
+const app = express();
+(async ()=>{
+    try{
+         await mongoose.connect(`${process.env.MONGODB_URI}/${DB_NAME}`);
+         app.on("error",(error)=>{
+            console.log("Error connecting to MongoDB:", error);
+            throw error; l
+         })
+
+         app.listen(process.env.PORT,()=>{
+            console.log(`Server is running on port ${process.env.PORT}`);
+         })
+        console.log("Connected to MongoDB successfully!");
+    }
+        catch(error){
+            console.log("Error connecting to MongoDB:", error);
+        }
+})()
+        */
