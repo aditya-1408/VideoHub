@@ -12,29 +12,24 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 connectDB()
-.then(()=>{
-  app.listen(process.env.PORT ||8000,()=>{
-    console.log(`Server is running at port : ${process.env.PORT}`)
+  .then(() => {
+    app.listen(process.env.PORT || 8000, () => {
+      console.log(`Server is running at port : ${process.env.PORT}`);
+    });
   })
-})
-.catch((error) => {
-  console.log("Error connecting to MongoDB:", error);
-  process.exit(1); // Exit the process with an error code
-});  
-
-
-
-
-
+  .catch((error) => {
+    console.log("Error connecting to MongoDB:", error);
+    process.exit(1); // Exit the process with an error code
+  });
 
 // .then(() => {
-  //   app.listen(port, () => {
-  //     console.log(`Server is running on port ${port}`);
-  //   });
-  // })
-  // .catch((error) => {
-  //   console.log("Error starting server:", error);
-  // });
+//   app.listen(port, () => {
+//     console.log(`Server is running on port ${port}`);
+//   });
+// })
+// .catch((error) => {
+//   console.log("Error starting server:", error);
+// });
 
 /*  this code is for connecting to MongoDB and starting the Express server. It uses Mongoose to connect to the MongoDB database specified by the MONGODB_URI environment variable and the DB_NAME constant. If the connection is successful, it starts the Express server on the port specified by the PORT environment variable. If there is an error during the connection, it logs the error to the console.
 import express from "express";
@@ -57,3 +52,4 @@ const app = express();
         }
 })()
         */
+       
