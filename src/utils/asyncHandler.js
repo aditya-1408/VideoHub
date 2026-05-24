@@ -8,7 +8,7 @@ const asyncHandler = (requestHandler) =>{
 
 export default asyncHandler;
 
-
+//  method 2
 
 // const aysncHandler = () =>{}
 // const asyncHandler = () => {() =>{}}  // you can acept function as parameter and return a function from it
