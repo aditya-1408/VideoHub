@@ -8,12 +8,6 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-console.log("cloudinary env loaded", {
-  cloudName: Boolean(process.env.CLOUDINARY_CLOUD_NAME),
-  apiKey: Boolean(process.env.CLOUDINARY_API_KEY),
-  apiSecret: Boolean(process.env.CLOUDINARY_API_SECRET),
-});
-
 const uploadOnCloudinary = async (localFilePath) => {
   try {
     if (!localFilePath) return null;
@@ -23,12 +17,21 @@ const uploadOnCloudinary = async (localFilePath) => {
       resource_type: "auto",
     });
     // file uploaded successfully then remove from local uploads folder
+    try {
+      await fs.promises.unlink(resolvedPath);
+    } catch (unlinkError) {
+      console.error("Failed to remove local temp file", unlinkError);
+    }
     console.log("File uploaded successfully on cloudinary", response.url);
     return response;
   } catch (error) {
     console.error("Cloudinary upload failed", error);
     if (localFilePath) {
-      fs.unlinkSync(path.resolve(localFilePath)); // remove locally saved temp file
+      try {
+        await fs.promises.unlink(path.resolve(localFilePath)); // remove locally saved temp file
+      } catch (unlinkError) {
+        console.error("Failed to remove local temp file", unlinkError);
+      }
     }
     // temporary file as the upload failed
     return null;
