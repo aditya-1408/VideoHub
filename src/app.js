@@ -16,4 +16,12 @@ app.use(express.urlencoded({extended:true,limit:"16kb"})) // for receiving url a
 
  app.use(cookieParser())  
 
+ // routes import
+ import userRouter from "./routes/user.routes.js";
+ //routes declarration
+
+ app.use("/api/v1/users",userRouter)
+
+ //http://localhost:5000/api/v1/users/resgister
+
 export default app;
