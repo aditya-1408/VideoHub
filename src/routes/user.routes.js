@@ -1,7 +1,8 @@
 import { Router } from "express";
-import { registerUser } from "../controllers/user.controller.js";
+import {  loginUser,registerUser } from "../controllers/user.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
-
+ 
+import { verifyJWT } from "../middlewares/auth.middleware.js";
 const router = Router();
 // upload fields is used to get files from the request and store them in the specified location, in this case, the "public/temp" directory. The fields method allows you to specify multiple file fields that can be uploaded in a single request. Each field is defined with a name and a maximum count of files that can be uploaded for that field. In this example, we have two fields: "avatar" and "coverImage", each allowing a maximum of one file to be uploaded.
 router.route("/register").post(
@@ -17,5 +18,10 @@ router.route("/register").post(
   ]),
   registerUser
 );
+
+router.route("/login").post(loginUser);
+
+//secured routes
+router.route("/logout").post(verifyJWT,logoutUser)
 
 export default router;
