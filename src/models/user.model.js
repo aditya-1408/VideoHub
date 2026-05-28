@@ -34,7 +34,7 @@ const userSchema = new Schema(
     },
     watchHistory: [
       {
-        type: Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId, // used to store references to video documents that the user has watched, allowing for efficient retrieval of the user's watch history and related video information when needed.
         ref: "Video",
       },
     ],
